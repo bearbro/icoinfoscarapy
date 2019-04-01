@@ -1,0 +1,30 @@
+icoinfoscrapy项目简介
+    功能：
+        从网站（https://icobench.com）爬取项目详情，可指定爬取范围
+    详情：
+        ico项目按起始时间排序后，一页一页爬取，对每条项目进入详情页面爬取获取项目详情信息
+        将数据写入本地数据库icobenchdb的表Icos_info中（数据库配置在pipelines.py文件中）
+        Icos_info的结构
+            name, info_href,rate,other,start ,end,countries,restrictions_KYC,whitelist,page,subN,team,introduction,tags,whitepaper_url,about
+            项目名，详情网页，得分，简介，开始时间，结束时间，国家，是否限制KYC，是否是白名单，所在页，页内次序，团队，项目简介，标签，白皮书地址url，项目其他信息
+
+    使用：
+        scrapy crawl infoSpider -a beginpage=【】 -a endpage=【】
+        其中ico项目按起始时间排序后的爬取的beginpage起始页，endpage结束页，
+        即爬取范围是[beginpage,endpage]
+
+        或着在pycharm中运行start.py文件（记得修改参数）
+    版本：
+        python3.7
+
+    更新日志：
+        2019年4月1日
+            1
+            进过简单的测试，为发现一级爬取信息与二级爬取信息匹配混乱的现象
+
+            2
+            项目详情页面ui结构有所变换，原whitepaper_url提取规则无法使用
+            出现下面两个方面的考虑，本次先不更新代码，待再次用到时再更新
+                1、之前已经爬取的相关数据已经保存到数据库，并已经用其进行了pdf下载
+                2、页面ui可能会再次改动
+
